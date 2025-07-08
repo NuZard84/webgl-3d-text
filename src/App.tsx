@@ -7,7 +7,8 @@ import { TextGeometry } from 'three/examples/jsm/Addons.js'
 
 function App(): JSX.Element {
   const canvasRef = useRef<HTMLCanvasElement>(null)
-  const [mouse, setMouse] = useState({
+  // Remove the unused mouse state since we're only setting it but never reading it
+  const [_, setMouse] = useState({
     x: 0,
     y: 0,
   })
@@ -31,8 +32,8 @@ function App(): JSX.Element {
     // Fix the texture path - it should be 'textures/matcaps' not 'texture/metcaps'
     const matcapTexture = textureloader.load(
       './textures/matcaps/8.png',
-      // Success callback
-      (texture) => {
+      // Success callback - removed unused parameter
+      () => {
         console.log('Matcap texture loaded successfully')
       },
       // Progress callback
@@ -113,7 +114,8 @@ function App(): JSX.Element {
     })
     renderer.setSize(sizes.width, sizes.height)
 
-    const clock = new THREE.Clock()
+    // Remove unused clock variable
+    // const clock = new THREE.Clock()
 
     const handleMouseMove = (e: MouseEvent) => {
       setMouse({
@@ -122,7 +124,7 @@ function App(): JSX.Element {
       })
     }
 
-    const handleResize = (e: UIEvent) => {
+    const handleResize = (_: UIEvent) => {
       sizes.width = window.innerWidth
       sizes.height = window.innerHeight
 
@@ -136,7 +138,7 @@ function App(): JSX.Element {
 
     }
 
-    const handleDoubleClick = (e: MouseEvent) => {
+    const handleDoubleClick = (_: MouseEvent) => {
       if (document.fullscreenElement) {
         document.exitFullscreen()
       } else {
